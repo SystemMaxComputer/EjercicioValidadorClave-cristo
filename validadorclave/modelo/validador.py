@@ -7,7 +7,9 @@ class ReglaValidacion[ABC]:
         self.longitud_esperada: int = longitud_esperada
 
     def _validar_longitud(self, clave: str) -> bool:
-        pass
+        if self.longitud_esperada > len(clave):
+            return True
+        return False
 
     def _contiene_mayuscula(self, clave: str) -> bool:
         pass
