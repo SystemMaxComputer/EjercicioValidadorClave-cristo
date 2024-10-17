@@ -50,8 +50,7 @@ class ReglaValidacionGanimedes(ReglaValidacion):
         for caracter in clave:
             if caracter == "@" or caracter == "_" or caracter == "#" or caracter == "$" or caracter == "%":
                 return True
-
-            return False
+        return False
 
     def es_valida(self, clave: str) -> bool:
         pass
@@ -60,6 +59,15 @@ class ReglaValidacionGanimedes(ReglaValidacion):
 class ReglaValidacionCalisto(ReglaValidacion):
     def __init__(self):
         super().__init__(6)
+
+    @staticmethod
+    def contiene_calisto(clave: str) -> bool:
+        if "calisto" in str.lower(clave):
+            mayusculas = sum(1 for caracter in clave if caracter.isupper())
+            if 2 <= mayusculas < 7:
+                return True
+            return False
+        return False
 
     def es_valida(self, clave: str) -> bool:
         pass
