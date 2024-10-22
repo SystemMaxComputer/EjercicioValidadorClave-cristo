@@ -4,51 +4,45 @@ from abc import abstractmethod, ABC
 
 class ReglaValidacion(ABC):
     def __init__(self, longitud_esperada: int):
-        self.longitud_esperada: int = longitud_esperada
+        self._longitud_esperada: int = longitud_esperada #atributo protegido(se puede acceder a la clase que lo contiene y sus subclases)
 
     def _validar_longitud(self, clave: str) -> bool:
-        if self.longitud_esperada < len(clave):
-            return True
+        return self._longitud_esperada < len(clave)
 
-        return False
-
-    @staticmethod
-    def _contiene_mayuscula(clave: str) -> bool:
-        for caracter in clave:
-            if caracter.isupper():
+    def _contiene_mayuscula(self, clave: str) -> bool:
+        for letra in clave:
+            if letra.isupper():
                 return True
 
         return False
 
-    @staticmethod
-    def _contiene_minuscula(clave: str) -> bool:
-        for caracter in clave:
-            if caracter.islower():
+    def _contiene_minuscula(self, clave: str) -> bool:
+        for letra in clave:
+            if letra.islower():
                 return True
 
         return False
 
-    @staticmethod
-    def _contiene_numero(clave: str) -> bool:
-        for caracter in clave:
-            if caracter.isdigit():
+    def _contiene_numero(self, clave: str) -> bool:
+        for letra in clave:
+            if letra.isdigit():
                 return True
 
         return False
 
     @abstractmethod
     def es_valida(self, clave: str) -> bool:
-        pass
+        ...
 
 
 class ReglaValidacionGanimedes(ReglaValidacion):
     def __init__(self):
-        super().__init__(8)
+        super().__init__(longitud_esperada=8)
 
     @staticmethod
     def contiene_caracter_especial(clave: str) -> bool:
-        for caracter in clave:
-            if caracter == "@" or caracter == "_" or caracter == "#" or caracter == "$" or caracter == "%":
+        for letra in clave:
+            if letra in "@_#$%":
                 return True
         return False
 
@@ -58,7 +52,7 @@ class ReglaValidacionGanimedes(ReglaValidacion):
 
 class ReglaValidacionCalisto(ReglaValidacion):
     def __init__(self):
-        super().__init__(6)
+        super().__init__(longitud_esperada=6)
 
     @staticmethod
     def contiene_calisto(clave: str) -> bool:
