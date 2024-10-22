@@ -72,7 +72,7 @@ class ReglaValidacionCalisto(ReglaValidacion):
         palabra: str = "calisto"
         index_calisto = 0
 
-        while (index_calisto + len(palabra)) < len(clave):
+        while (index_calisto + len(palabra)) <= len(clave):
             index_calisto = clave_temp.find(palabra, index_calisto)
             if index_calisto >= 0:
                 pi = index_calisto
